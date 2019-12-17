@@ -1135,7 +1135,7 @@ body.fh5co-mobile-menu-visible #fh5co-mobile-menu {
 }
 
 .fh5co-spacer-lg {
-  height: 100px;
+  height: 120px;
 }
 @media screen and (max-width: 768px) {
   .fh5co-spacer-lg {
@@ -1333,6 +1333,10 @@ Components
 /* Features*/
 #fh5co-features {
   padding: 7em 0;
+}
+#fh3co-features-head {
+  padding: 6em 0;
+  padding-bottom: 0em;
 }
 #fh5co-features .fh5co-feature {
   margin-bottom: 30px;
@@ -1866,4 +1870,43 @@ a > img.fh5co-align-center {
   margin-right: auto;
 }
 
+.resltCaution {
+  position: relative;
+  background-color: yellow;
+  height: 80px;
+}
+
+.resltCaution::after {
+  position: absolute;
+  top: -5px; bottom: -5px;
+  left: 0px; right: 0px;
+  background: repeating-linear-gradient(45deg, yellow, yellow 10px, black 10px, black 20px);
+  content: '';
+  z-index: -1;
+}
+
+.resltCaution .message {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #333333;
+  font-weight: bold;
+}
+
+.resltCaution .message .resltMessage {
+  font-size: 12px;
+  color: red;
+}
+
+.resltSafety {
+  position: relative;
+  height: 80px;
+}
+
+.resltSafety .message {
+  line-height: 80px;
+  color: #57cecd;
+  font-weight: bold;
+}
 /*# sourceMappingURL=style.css.map */
