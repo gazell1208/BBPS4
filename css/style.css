@@ -1870,31 +1870,21 @@ a > img.fh5co-align-center {
   margin-right: auto;
 }
 
-.resltCaution {
-  position: relative;
-  background-color: yellow;
-  height: 80px;
+.cautionBorder {
+  position : relative;
+  background: repeating-linear-gradient(45deg, yellow, yellow 5px, black 5px, black 10px);
+  height: 5px;
 }
 
-.resltCaution::after {
-  position: absolute;
-  top: -5px; bottom: -5px;
-  left: 0px; right: 0px;
-  background: repeating-linear-gradient(45deg, yellow, yellow 10px, black 10px, black 20px);
-  content: '';
-  z-index: -1;
-}
-
-.resltCaution .message {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+.cautionMessage {
+  background-color:yellow;
   color: #333333;
   font-weight: bold;
+  text-align:center;
+  font-size:16px;
 }
 
-.resltCaution .message .resltMessage {
+.cautionMessage .resltMessage {
   font-size: 12px;
   color: red;
 }
@@ -1908,5 +1898,13 @@ a > img.fh5co-align-center {
   line-height: 80px;
   color: #57cecd;
   font-weight: bold;
+}
+
+.tableHeadFont {
+  font-size:14px;
+}
+
+.tableFont {
+  font-size:12px;
 }
 /*# sourceMappingURL=style.css.map */
