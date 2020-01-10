@@ -107,6 +107,17 @@
 
 	</head>
 	<body>
+    <?php
+        $host = 'localhost';
+        $username = 'user';
+        $password = 'user';
+        $dbname = 'bbps4';
+
+        $link = mysqli_connect($host, $username, $password, $dbname);
+        if (mysqli_connect_errno()) {
+            die("データベースに接続できません:" . mysqli_connect_error() . "\n");
+        }
+    ?>
 		<!-- HEADER START -->
 		<header id="fh5co-header-section" role="header" class="" style="background-color: #2d2d4a" >
 			<div class="container">
@@ -150,11 +161,24 @@
                                             <tr class="text-center tableFont">
                                                 <td>頭</td>
                                                 <td>
-                                                    <select class="form-control input-sm" id="headName" onchange="setWeight('head'); setAptude()">
-                                                        <option value="650">クーガーⅠ型</option>
-                                                        <option value="670">クーガーⅡ型</option>
-                                                        <option value="500">輝星壱式</option>
-                                                    </select>
+                                                    <?php
+                                                        $query = 'select name, weight from parts_head_unstrangth order by id;';
+                                                        $reslt = $link->query($query);
+                                                        $head_array = array();
+                                                        
+                                                        while($row = $reslt->fetch_row()){
+                                                            array_push($head_array, [$row[0], $row[1]]);
+                                                        }
+
+                                                        $select_heads = "<select class=\"form-control input-sm\" id=\"headName\" onchange=\"setWeight('head'); setAptude()\">\n";
+                                                        for ( $indexA = 0; $indexA < count( $head_array ); $indexA++ ) {
+                                                            $select_heads .= "\t<option value=\"{$head_array[$indexA][1]}\">";
+                                                            $select_heads .= "{$head_array[$indexA][0]}";
+                                                            $select_heads .= "</option>\n";
+                                                        }
+                                                        $select_heads .= "</select>\n";
+                                                        echo "{$select_heads}";
+                                                    ?>
                                                 </td>
                                                 <td>
                                                     <select class="form-control input-sm" id="headStrength" onchange="setWeight('head')">
@@ -169,11 +193,24 @@
                                             <tr class="text-center tableFont">
                                                 <td>胴</td>
                                                 <td>
-                                                    <select class="form-control input-sm" id="bodyName" onchange="setWeight('body'); setAptude()">
-                                                        <option value="650">クーガーⅠ型</option>
-                                                        <option value="670">クーガーⅡ型</option>
-                                                        <option value="500">ツェーブラA1</option>
-                                                    </select>
+                                                    <?php
+                                                        $query = 'select name, weight from parts_body_unstrangth order by id;';
+                                                        $reslt = $link->query($query);
+                                                        $body_array = array();
+                                                        
+                                                        while($row = $reslt->fetch_row()){
+                                                            array_push($body_array, [$row[0], $row[1]]);
+                                                        }
+
+                                                        $select_bodys = "<select class=\"form-control input-sm\" id=\"bodyName\" onchange=\"setWeight('body'); setAptude()\">\n";
+                                                        for ( $indexA = 0; $indexA < count( $body_array ); $indexA++ ) {
+                                                            $select_bodys .= "\t<option value=\"{$body_array[$indexA][1]}\">";
+                                                            $select_bodys .= "{$body_array[$indexA][0]}";
+                                                            $select_bodys .= "</option>\n";
+                                                        }
+                                                        $select_bodys .= "</select>\n";
+                                                        echo "{$select_bodys}";
+                                                    ?>
                                                 </td>
                                                 <td>
                                                     <select class="form-control input-sm" id="bodyStrength" onchange="setWeight('body')">
@@ -188,10 +225,24 @@
                                             <tr class="text-center tableFont">
                                                 <td>腕</td>
                                                 <td>
-                                                    <select class="form-control input-sm" id="armName" onchange="setWeight('arm'); setAptude()">
-                                                        <option value="650">クーガーⅠ型</option>
-                                                        <option value="670">クーガーⅡ型</option>
-                                                    </select>
+                                                    <?php
+                                                        $query = 'select name, weight from parts_arm_unstrangth order by id;';
+                                                        $reslt = $link->query($query);
+                                                        $arm_array = array();
+                                                        
+                                                        while($row = $reslt->fetch_row()){
+                                                            array_push($arm_array, [$row[0], $row[1]]);
+                                                        }
+
+                                                        $select_arms = "<select class=\"form-control input-sm\" id=\"armName\" onchange=\"setWeight('arm'); setAptude()\">\n";
+                                                        for ( $indexA = 0; $indexA < count( $arm_array ); $indexA++ ) {
+                                                            $select_arms .= "\t<option value=\"{$arm_array[$indexA][1]}\">";
+                                                            $select_arms .= "{$arm_array[$indexA][0]}";
+                                                            $select_arms .= "</option>\n";
+                                                        }
+                                                        $select_arms .= "</select>\n";
+                                                        echo "{$select_arms}";
+                                                    ?>
                                                 </td>
                                                 <td>
                                                     <select class="form-control input-sm" id="armStrength" onchange="setWeight('arm')">
@@ -206,13 +257,27 @@
                                             <tr class="text-center tableFont">
                                                 <td>脚</td>
                                                 <td>
-                                                    <select class="form-control input-sm" id="legName" onchange="setWeight('arm'); setAptude()">
-                                                        <option value="650">クーガーⅠ型</option>
-                                                        <option value="670">クーガーⅡ型</option>
-                                                    </select>
+                                                    <?php
+                                                        $query = 'select name, weight from parts_leg_unstrangth order by id;';
+                                                        $reslt = $link->query($query);
+                                                        $leg_array = array();
+                                                        
+                                                        while($row = $reslt->fetch_row()){
+                                                            array_push($leg_array, [$row[0], $row[1]]);
+                                                        }
+
+                                                        $select_legs = "<select class=\"form-control input-sm\" id=\"legName\" onchange=\"setWeight('leg'); setAptude(); getLegResistance();\">\n";
+                                                        for ( $indexA = 0; $indexA < count( $leg_array ); $indexA++ ) {
+                                                            $select_legs .= "\t<option value=\"{$leg_array[$indexA][1]}\">";
+                                                            $select_legs .= "{$leg_array[$indexA][0]}";
+                                                            $select_legs .= "</option>\n";
+                                                        }
+                                                        $select_legs .= "</select>\n";
+                                                        echo "{$select_legs}";
+                                                    ?>
                                                 </td>
                                                 <td>
-                                                    <select class="form-control input-sm" id="legStrength" onchange="setWeight('arm')">
+                                                    <select class="form-control input-sm" id="legStrength" onchange="setWeight('leg'); getLegResistance()">
                                                         <option>0</option>
                                                         <option>1</option>
                                                         <option>2</option>
@@ -251,10 +316,24 @@
                                         <tbody>
                                             <tr class="text-center tableFont">
                                                 <td>
-                                                    <select class="form-control input-sm" id="assaultMainName" onchange="setWeight('assaultMain')">
-                                                        <option value="300">M90サブマシンガン</option>
-                                                        <option value="330">M99サーペント</option>
-                                                    </select>
+                                                    <?php
+                                                        $query = 'select name, weight from wepon_main where army = 1 order by id ;';
+                                                        $reslt = $link->query($query);
+                                                        $array = array();
+                                                        
+                                                        while($row = $reslt->fetch_row()){
+                                                            array_push($array, [$row[0], $row[1]]);
+                                                        }
+
+                                                        $select_mains = "<select class=\"form-control input-sm\" id=\"assaultMainName\" onchange=\"setWeight('assaultMain')\">\n";
+                                                        for ( $indexA = 0; $indexA < count( $array ); $indexA++ ) {
+                                                            $select_mains .= "\t<option value=\"{$array[$indexA][1]}\">";
+                                                            $select_mains .= "{$array[$indexA][0]}";
+                                                            $select_mains .= "</option>\n";
+                                                        }
+                                                        $select_mains .= "</select>\n";
+                                                        echo "{$select_mains}";
+                                                    ?>
                                                 </td>
                                                 <td>
                                                     <select class="form-control input-sm" id="assaultMainStrength" onchange="setWeight('assaultMain')">
@@ -268,10 +347,24 @@
                                             </tr>
                                             <tr class="text-center tableFont">
                                                 <td>
-                                                    <select class="form-control input-sm" id="assaultSubName" onchange="setWeight('assaultSub')">
-                                                        <option value="300">Mk3クラッカー</option>
-                                                        <option value="330">Mk5クラッカー</option>
-                                                    </select>
+                                                    <?php
+                                                        $query = 'select name, weight from wepon_sub where army = 1 order by id ;';
+                                                        $reslt = $link->query($query);
+                                                        $array = array();
+                                                        
+                                                        while($row = $reslt->fetch_row()){
+                                                            array_push($array, [$row[0], $row[1]]);
+                                                        }
+
+                                                        $select_subs = "<select class=\"form-control input-sm\" id=\"assaultSubName\" onchange=\"setWeight('assaultSub')\">\n";
+                                                        for ( $indexA = 0; $indexA < count( $array ); $indexA++ ) {
+                                                            $select_subs .= "\t<option value=\"{$array[$indexA][1]}\">";
+                                                            $select_subs .= "{$array[$indexA][0]}";
+                                                            $select_subs .= "</option>\n";
+                                                        }
+                                                        $select_subs .= "</select>\n";
+                                                        echo "{$select_subs}";
+                                                    ?>
                                                 </td>
                                                 <td>
                                                     <select class="form-control input-sm" id="assaultSubStrength" onchange="setWeight('assaultSub')">
@@ -285,10 +378,24 @@
                                             </tr>
                                             <tr class="text-center tableFont">
                                                 <td>
-                                                    <select class="form-control input-sm" id="assaultSupName" onchange="setWeight('assaultSup')">
-                                                        <option value="300">デュエルソード</option>
-                                                        <option value="330">マーシャルソード</option>
-                                                    </select>
+                                                    <?php
+                                                        $query = 'select name, weight from wepon_aux where army = 1 order by id ;';
+                                                        $reslt = $link->query($query);
+                                                        $array = array();
+                                                        
+                                                        while($row = $reslt->fetch_row()){
+                                                            array_push($array, [$row[0], $row[1]]);
+                                                        }
+
+                                                        $select_auxs = "<select class=\"form-control input-sm\" id=\"assaultSupName\" onchange=\"setWeight('assaultSup')\">\n";
+                                                        for ( $indexA = 0; $indexA < count( $array ); $indexA++ ) {
+                                                            $select_auxs .= "\t<option value=\"{$array[$indexA][1]}\">";
+                                                            $select_auxs .= "{$array[$indexA][0]}";
+                                                            $select_auxs .= "</option>\n";
+                                                        }
+                                                        $select_auxs .= "</select>\n";
+                                                        echo "{$select_auxs}";
+                                                    ?>
                                                 </td>
                                                 <td>
                                                     <select class="form-control input-sm" id="assaultSupStrength" onchange="setWeight('assaultSup')">
@@ -302,10 +409,24 @@
                                             </tr>
                                             <tr class="text-center tableFont">
                                                 <td>
-                                                    <select class="form-control input-sm" id="assaultSpName" onchange="setWeight('assaultSp')">
-                                                        <option value="300">アサルトチャージャー</option>
-                                                        <option value="330">AC-ディスタンス</option>
-                                                    </select>
+                                                    <?php
+                                                        $query = 'select name, weight from wepon_sp where army = 1 order by id ;';
+                                                        $reslt = $link->query($query);
+                                                        $array = array();
+                                                        
+                                                        while($row = $reslt->fetch_row()){
+                                                            array_push($array, [$row[0], $row[1]]);
+                                                        }
+
+                                                        $select_sps = "<select class=\"form-control input-sm\" id=\"assaultSpName\" onchange=\"setWeight('assaultSp')\">\n";
+                                                        for ( $indexA = 0; $indexA < count( $array ); $indexA++ ) {
+                                                            $select_sps .= "\t<option value=\"{$array[$indexA][1]}\">";
+                                                            $select_sps .= "{$array[$indexA][0]}";
+                                                            $select_sps .= "</option>\n";
+                                                        }
+                                                        $select_sps .= "</select>\n";
+                                                        echo "{$select_sps}";
+                                                    ?>
                                                 </td>
                                                 <td>
                                                     <select class="form-control input-sm" id="assaultSpStrength" onchange="setWeight('assaultSp')">
@@ -342,10 +463,24 @@
                                         <tbody>
                                             <tr class="text-center tableFont">
                                                 <td>
-                                                    <select class="form-control input-sm" id="heavyMainName" onchange="setWeight('heavyMain')">
-                                                        <option value="300">M90サブマシンガン</option>
-                                                        <option value="330">M99サーペント</option>
-                                                    </select>
+                                                    <?php
+                                                        $query = 'select name, weight from wepon_main where army = 2 order by id ;';
+                                                        $reslt = $link->query($query);
+                                                        $array = array();
+                                                        
+                                                        while($row = $reslt->fetch_row()){
+                                                            array_push($array, [$row[0], $row[1]]);
+                                                        }
+
+                                                        $select_mains = "<select class=\"form-control input-sm\" id=\"heavyMainName\" onchange=\"setWeight('heavyMain')\">\n";
+                                                        for ( $indexA = 0; $indexA < count( $array ); $indexA++ ) {
+                                                            $select_mains .= "\t<option value=\"{$array[$indexA][1]}\">";
+                                                            $select_mains .= "{$array[$indexA][0]}";
+                                                            $select_mains .= "</option>\n";
+                                                        }
+                                                        $select_mains .= "</select>\n";
+                                                        echo "{$select_mains}";
+                                                    ?>
                                                 </td>
                                                 <td>
                                                     <select class="form-control input-sm" id="heavyMainStrength" onchange="setWeight('heavyMain')">
@@ -359,10 +494,24 @@
                                             </tr>
                                             <tr class="text-center tableFont">
                                                 <td>
-                                                    <select class="form-control input-sm" id="heavySubName" onchange="setWeight('heavySub')">
-                                                        <option value="300">Mk3クラッカー</option>
-                                                        <option value="330">Mk5クラッカー</option>
-                                                    </select>
+                                                    <?php
+                                                        $query = 'select name, weight from wepon_sub where army = 2 order by id ;';
+                                                        $reslt = $link->query($query);
+                                                        $array = array();
+                                                        
+                                                        while($row = $reslt->fetch_row()){
+                                                            array_push($array, [$row[0], $row[1]]);
+                                                        }
+
+                                                        $select_subs = "<select class=\"form-control input-sm\" id=\"heavySubName\" onchange=\"setWeight('heavySub')\">\n";
+                                                        for ( $indexA = 0; $indexA < count( $array ); $indexA++ ) {
+                                                            $select_subs .= "\t<option value=\"{$array[$indexA][1]}\">";
+                                                            $select_subs .= "{$array[$indexA][0]}";
+                                                            $select_subs .= "</option>\n";
+                                                        }
+                                                        $select_subs .= "</select>\n";
+                                                        echo "{$select_subs}";
+                                                    ?>
                                                 </td>
                                                 <td>
                                                     <select class="form-control input-sm" id="heavySubStrength" onchange="setWeight('heavySub')">
@@ -376,10 +525,24 @@
                                             </tr>
                                             <tr class="text-center tableFont">
                                                 <td>
-                                                    <select class="form-control input-sm" id="heavySupName" onchange="setWeight('heavySup')">
-                                                        <option value="300">デュエルソード</option>
-                                                        <option value="330">マーシャルソード</option>
-                                                    </select>
+                                                    <?php
+                                                        $query = 'select name, weight from wepon_aux where army = 2 order by id ;';
+                                                        $reslt = $link->query($query);
+                                                        $array = array();
+                                                        
+                                                        while($row = $reslt->fetch_row()){
+                                                            array_push($array, [$row[0], $row[1]]);
+                                                        }
+
+                                                        $select_auxs = "<select class=\"form-control input-sm\" id=\"heavySupName\" onchange=\"setWeight('heavySup')\">\n";
+                                                        for ( $indexA = 0; $indexA < count( $array ); $indexA++ ) {
+                                                            $select_auxs .= "\t<option value=\"{$array[$indexA][1]}\">";
+                                                            $select_auxs .= "{$array[$indexA][0]}";
+                                                            $select_auxs .= "</option>\n";
+                                                        }
+                                                        $select_auxs .= "</select>\n";
+                                                        echo "{$select_auxs}";
+                                                    ?>
                                                 </td>
                                                 <td>
                                                     <select class="form-control input-sm" id="heavySupStrength" onchange="setWeight('heavySup')">
@@ -393,10 +556,24 @@
                                             </tr>
                                             <tr class="text-center tableFont">
                                                 <td>
-                                                    <select class="form-control input-sm" id="heavySpName" onchange="setWeight('heavySp')">
-                                                        <option value="300">アサルトチャージャー</option>
-                                                        <option value="330">AC-ディスタンス</option>
-                                                    </select>
+                                                    <?php
+                                                        $query = 'select name, weight from wepon_sp where army = 2 order by id ;';
+                                                        $reslt = $link->query($query);
+                                                        $array = array();
+                                                        
+                                                        while($row = $reslt->fetch_row()){
+                                                            array_push($array, [$row[0], $row[1]]);
+                                                        }
+
+                                                        $select_sps = "<select class=\"form-control input-sm\" id=\"heavySpName\" onchange=\"setWeight('heavySp')\">\n";
+                                                        for ( $indexA = 0; $indexA < count( $array ); $indexA++ ) {
+                                                            $select_sps .= "\t<option value=\"{$array[$indexA][1]}\">";
+                                                            $select_sps .= "{$array[$indexA][0]}";
+                                                            $select_sps .= "</option>\n";
+                                                        }
+                                                        $select_sps .= "</select>\n";
+                                                        echo "{$select_sps}";
+                                                    ?>
                                                 </td>
                                                 <td>
                                                     <select class="form-control input-sm" id="heavySpStrength" onchange="setWeight('heavySp')">
@@ -436,10 +613,24 @@
                                         <tbody>
                                             <tr class="text-center tableFont">
                                                 <td>
-                                                    <select class="form-control input-sm" id="shortMainName" onchange="setWeight('shortMain')">
-                                                        <option value="300">M90サブマシンガン</option>
-                                                        <option value="330">M99サーペント</option>
-                                                    </select>
+                                                    <?php
+                                                        $query = 'select name, weight from wepon_main where army = 3 order by id ;';
+                                                        $reslt = $link->query($query);
+                                                        $array = array();
+                                                        
+                                                        while($row = $reslt->fetch_row()){
+                                                            array_push($array, [$row[0], $row[1]]);
+                                                        }
+
+                                                        $select_mains = "<select class=\"form-control input-sm\" id=\"shortMainName\" onchange=\"setWeight('shortMain')\">\n";
+                                                        for ( $indexA = 0; $indexA < count( $array ); $indexA++ ) {
+                                                            $select_mains .= "\t<option value=\"{$array[$indexA][1]}\">";
+                                                            $select_mains .= "{$array[$indexA][0]}";
+                                                            $select_mains .= "</option>\n";
+                                                        }
+                                                        $select_mains .= "</select>\n";
+                                                        echo "{$select_mains}";
+                                                    ?>
                                                 </td>
                                                 <td>
                                                     <select class="form-control input-sm" id="shortMainStrength" onchange="setWeight('shortMain')">
@@ -453,10 +644,24 @@
                                             </tr>
                                             <tr class="text-center tableFont">
                                                 <td>
-                                                    <select class="form-control input-sm" id="shortSubName" onchange="setWeight('shortSub')">
-                                                        <option value="300">Mk3クラッカー</option>
-                                                        <option value="330">Mk5クラッカー</option>
-                                                    </select>
+                                                    <?php
+                                                        $query = 'select name, weight from wepon_sub where army = 3 order by id ;';
+                                                        $reslt = $link->query($query);
+                                                        $array = array();
+                                                        
+                                                        while($row = $reslt->fetch_row()){
+                                                            array_push($array, [$row[0], $row[1]]);
+                                                        }
+
+                                                        $select_subs = "<select class=\"form-control input-sm\" id=\"shortSubName\" onchange=\"setWeight('shortSub')\">\n";
+                                                        for ( $indexA = 0; $indexA < count( $array ); $indexA++ ) {
+                                                            $select_subs .= "\t<option value=\"{$array[$indexA][1]}\">";
+                                                            $select_subs .= "{$array[$indexA][0]}";
+                                                            $select_subs .= "</option>\n";
+                                                        }
+                                                        $select_subs .= "</select>\n";
+                                                        echo "{$select_subs}";
+                                                    ?>
                                                 </td>
                                                 <td>
                                                     <select class="form-control input-sm" id="shortSubStrength" onchange="setWeight('shortSub')">
@@ -470,10 +675,24 @@
                                             </tr>
                                             <tr class="text-center tableFont">
                                                 <td>
-                                                    <select class="form-control input-sm" id="shortSupName" onchange="setWeight('shortSup')">
-                                                        <option value="300">デュエルソード</option>
-                                                        <option value="330">マーシャルソード</option>
-                                                    </select>
+                                                    <?php
+                                                        $query = 'select name, weight from wepon_aux where army = 3 order by id ;';
+                                                        $reslt = $link->query($query);
+                                                        $array = array();
+                                                        
+                                                        while($row = $reslt->fetch_row()){
+                                                            array_push($array, [$row[0], $row[1]]);
+                                                        }
+
+                                                        $select_auxs = "<select class=\"form-control input-sm\" id=\"shortSupName\" onchange=\"setWeight('shortSup')\">\n";
+                                                        for ( $indexA = 0; $indexA < count( $array ); $indexA++ ) {
+                                                            $select_auxs .= "\t<option value=\"{$array[$indexA][1]}\">";
+                                                            $select_auxs .= "{$array[$indexA][0]}";
+                                                            $select_auxs .= "</option>\n";
+                                                        }
+                                                        $select_auxs .= "</select>\n";
+                                                        echo "{$select_auxs}";
+                                                    ?>
                                                 </td>
                                                 <td>
                                                     <select class="form-control input-sm" id="shortSupStrength" onchange="setWeight('shortSup')">
@@ -487,10 +706,24 @@
                                             </tr>
                                             <tr class="text-center tableFont">
                                                 <td>
-                                                    <select class="form-control input-sm" id="shortSpName" onchange="setWeight('shortSp')">
-                                                        <option value="300">アサルトチャージャー</option>
-                                                        <option value="330">AC-ディスタンス</option>
-                                                    </select>
+                                                    <?php
+                                                        $query = 'select name, weight from wepon_sp where army = 3 order by id ;';
+                                                        $reslt = $link->query($query);
+                                                        $array = array();
+                                                        
+                                                        while($row = $reslt->fetch_row()){
+                                                            array_push($array, [$row[0], $row[1]]);
+                                                        }
+
+                                                        $select_sps = "<select class=\"form-control input-sm\" id=\"shortSpName\" onchange=\"setWeight('shortSp')\">\n";
+                                                        for ( $indexA = 0; $indexA < count( $array ); $indexA++ ) {
+                                                            $select_sps .= "\t<option value=\"{$array[$indexA][1]}\">";
+                                                            $select_sps .= "{$array[$indexA][0]}";
+                                                            $select_sps .= "</option>\n";
+                                                        }
+                                                        $select_sps .= "</select>\n";
+                                                        echo "{$select_sps}";
+                                                    ?>
                                                 </td>
                                                 <td>
                                                     <select class="form-control input-sm" id="shortSpStrength" onchange="setWeight('shortSp')">
@@ -527,10 +760,24 @@
                                         <tbody>
                                             <tr class="text-center tableFont">
                                                 <td>
-                                                    <select class="form-control input-sm" id="suportMainName" onchange="setWeight('suportMain')">
-                                                        <option value="300">M90サブマシンガン</option>
-                                                        <option value="330">M99サーペント</option>
-                                                    </select>
+                                                    <?php
+                                                        $query = 'select name, weight from wepon_main where army = 4 order by id ;';
+                                                        $reslt = $link->query($query);
+                                                        $array = array();
+                                                        
+                                                        while($row = $reslt->fetch_row()){
+                                                            array_push($array, [$row[0], $row[1]]);
+                                                        }
+
+                                                        $select_mains = "<select class=\"form-control input-sm\" id=\"suportMainName\" onchange=\"setWeight('suportMain')\">\n";
+                                                        for ( $indexA = 0; $indexA < count( $array ); $indexA++ ) {
+                                                            $select_mains .= "\t<option value=\"{$array[$indexA][1]}\">";
+                                                            $select_mains .= "{$array[$indexA][0]}";
+                                                            $select_mains .= "</option>\n";
+                                                        }
+                                                        $select_mains .= "</select>\n";
+                                                        echo "{$select_mains}";
+                                                    ?>
                                                 </td>
                                                 <td>
                                                     <select class="form-control input-sm" id="suportMainStrength" onchange="setWeight('suportMain')">
@@ -544,10 +791,24 @@
                                             </tr>
                                             <tr class="text-center tableFont">
                                                 <td>
-                                                    <select class="form-control input-sm" id="suportSubName" onchange="setWeight('suportSub')">
-                                                        <option value="300">Mk3クラッカー</option>
-                                                        <option value="330">Mk5クラッカー</option>
-                                                    </select>
+                                                    <?php
+                                                        $query = 'select name, weight from wepon_sub where army = 4 order by id ;';
+                                                        $reslt = $link->query($query);
+                                                        $array = array();
+                                                        
+                                                        while($row = $reslt->fetch_row()){
+                                                            array_push($array, [$row[0], $row[1]]);
+                                                        }
+
+                                                        $select_subs = "<select class=\"form-control input-sm\" id=\"suportSubName\" onchange=\"setWeight('suportSub')\">\n";
+                                                        for ( $indexA = 0; $indexA < count( $array ); $indexA++ ) {
+                                                            $select_subs .= "\t<option value=\"{$array[$indexA][1]}\">";
+                                                            $select_subs .= "{$array[$indexA][0]}";
+                                                            $select_subs .= "</option>\n";
+                                                        }
+                                                        $select_subs .= "</select>\n";
+                                                        echo "{$select_subs}";
+                                                    ?>
                                                 </td>
                                                 <td>
                                                     <select class="form-control input-sm" id="suportSubStrength" onchange="setWeight('suportSub')">
@@ -561,10 +822,24 @@
                                             </tr>
                                             <tr class="text-center tableFont">
                                                 <td>
-                                                    <select class="form-control input-sm" id="suportSupName" onchange="setWeight('suportSup')">
-                                                        <option value="300">デュエルソード</option>
-                                                        <option value="330">マーシャルソード</option>
-                                                    </select>
+                                                    <?php
+                                                        $query = 'select name, weight from wepon_aux where army = 4 order by id ;';
+                                                        $reslt = $link->query($query);
+                                                        $array = array();
+                                                        
+                                                        while($row = $reslt->fetch_row()){
+                                                            array_push($array, [$row[0], $row[1]]);
+                                                        }
+
+                                                        $select_auxs = "<select class=\"form-control input-sm\" id=\"suportSupName\" onchange=\"setWeight('suportSup')\">\n";
+                                                        for ( $indexA = 0; $indexA < count( $array ); $indexA++ ) {
+                                                            $select_auxs .= "\t<option value=\"{$array[$indexA][1]}\">";
+                                                            $select_auxs .= "{$array[$indexA][0]}";
+                                                            $select_auxs .= "</option>\n";
+                                                        }
+                                                        $select_auxs .= "</select>\n";
+                                                        echo "{$select_auxs}";
+                                                    ?>
                                                 </td>
                                                 <td>
                                                     <select class="form-control input-sm" id="suportSupStrength" onchange="setWeight('suportSup')">
@@ -578,10 +853,24 @@
                                             </tr>
                                             <tr class="text-center tableFont">
                                                 <td>
-                                                    <select class="form-control input-sm" id="suportSpName" onchange="setWeight('suportSp')">
-                                                        <option value="300">アサルトチャージャー</option>
-                                                        <option value="330">AC-ディスタンス</option>
-                                                    </select>
+                                                    <?php
+                                                        $query = 'select name, weight from wepon_sp where army = 4 order by id ;';
+                                                        $reslt = $link->query($query);
+                                                        $array = array();
+                                                        
+                                                        while($row = $reslt->fetch_row()){
+                                                            array_push($array, [$row[0], $row[1]]);
+                                                        }
+
+                                                        $select_sps = "<select class=\"form-control input-sm\" id=\"suportSpName\" onchange=\"setWeight('suportSp')\">\n";
+                                                        for ( $indexA = 0; $indexA < count( $array ); $indexA++ ) {
+                                                            $select_sps .= "\t<option value=\"{$array[$indexA][1]}\">";
+                                                            $select_sps .= "{$array[$indexA][0]}";
+                                                            $select_sps .= "</option>\n";
+                                                        }
+                                                        $select_sps .= "</select>\n";
+                                                        echo "{$select_sps}";
+                                                    ?>
                                                 </td>
                                                 <td>
                                                     <select class="form-control input-sm" id="suportSpStrength" onchange="setWeight('suportSp')">

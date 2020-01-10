@@ -1,24 +1,35 @@
 window.onload = function(){
-    // testData
-    document.getElementById("legLoading").innerHTML = 3800;
-
-    this.setAllWeight();
-
-    this.setMachineWeight();
-    this.setAssaultWeight();
-    this.setHeavyWeight();
-    this.setShortWeight();
-    this.setSuportWeight();
-    this.setTotalWeight();
+    this.getLegResistance()
+    .then(data => {
+        document.getElementById("legLoading").innerHTML = data;
+        this.setAllWeight();
+        this.setMachineWeight();
+        this.setAssaultWeight();
+        this.setHeavyWeight();
+        this.setShortWeight();
+        this.setSuportWeight();
+        this.setTotalWeight();
+    })
+    .catch(err => {
+        console.log(err);
+    })
 };
 
 window.onchange = function(){
-    this.setMachineWeight();
-    this.setAssaultWeight();
-    this.setHeavyWeight();
-    this.setShortWeight();
-    this.setSuportWeight();
-    this.setTotalWeight();
+    this.getLegResistance()
+    .then(data => {
+        document.getElementById("legLoading").innerHTML = data;
+        this.setAllWeight();
+        this.setMachineWeight();
+        this.setAssaultWeight();
+        this.setHeavyWeight();
+        this.setShortWeight();
+        this.setSuportWeight();
+        this.setTotalWeight();
+    })
+    .catch(err => {
+        console.log(err);
+    })
 }
 
 /**
@@ -426,4 +437,17 @@ function calcStrengthWeight(bef_weight, strengthCnt){
     }else {
         return bef_weight;
     }
+}
+
+/**
+ * 脚パーツの重量耐性値取得
+ */
+async function getLegResistance(){
+    var legs = (document.getElementById("legName").innerText).split(/\n/);
+    var index = document.getElementById("legName").selectedIndex;
+    var legName = legs[index];
+    var strength = document.getElementById("legStrength").value;
+    var url = 'http://localhost/bbps4/getLegResistance.php?legname=' + legName + '&strength=' + strength;
+
+    return await (await fetch(url)).json();
 }
