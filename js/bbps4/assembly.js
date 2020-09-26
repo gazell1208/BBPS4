@@ -1,6 +1,6 @@
 window.onload = function(){
     this.getLegResistance()
-    .then(data => {
+    .then(function(data){
         document.getElementById("legLoading").innerHTML = data;
         this.setAllWeight();
         this.setMachineWeight();
@@ -10,14 +10,14 @@ window.onload = function(){
         this.setSuportWeight();
         this.setTotalWeight();
     })
-    .catch(err => {
+    .catch(function(err){
         console.log(err);
     })
 };
 
 window.onchange = function(){
     this.getLegResistance()
-    .then(data => {
+    .then(function(data){
         document.getElementById("legLoading").innerHTML = data;
         this.setAllWeight();
         this.setMachineWeight();
@@ -27,7 +27,7 @@ window.onchange = function(){
         this.setSuportWeight();
         this.setTotalWeight();
     })
-    .catch(err => {
+    .catch(function(err){
         console.log(err);
     })
 }
@@ -443,11 +443,10 @@ function calcStrengthWeight(bef_weight, strengthCnt){
  * 脚パーツの重量耐性値取得
  */
 async function getLegResistance(){
-    var legs = (document.getElementById("legName").innerText).split(/\n/);
-    var index = document.getElementById("legName").selectedIndex;
-    var legName = legs[index];
+    var index = document.getElementById("legName").selectedIndex + 1;
     var strength = document.getElementById("legStrength").value;
-    var url = 'http://localhost/bbps4/getLegResistance.php?legname=' + legName + '&strength=' + strength;
+    // var url = 'http://bbps4assem.starfree.jp/getLegResistance.php?legid=' + index + '&strength=' + strength;
+    var url = 'http://localhost/bbps4/getLegResistance.php?legid=' + index + '&strength=' + strength;
 
     return await (await fetch(url)).json();
 }
