@@ -1135,7 +1135,7 @@ body.fh5co-mobile-menu-visible #fh5co-mobile-menu {
 }
 
 .fh5co-spacer-lg {
-  height: 100px;
+  height: 120px;
 }
 @media screen and (max-width: 768px) {
   .fh5co-spacer-lg {
@@ -1333,6 +1333,10 @@ Components
 /* Features*/
 #fh5co-features {
   padding: 7em 0;
+}
+#fh3co-features-head {
+  padding: 6em 0;
+  padding-bottom: 0em;
 }
 #fh5co-features .fh5co-feature {
   margin-bottom: 30px;
@@ -1866,4 +1870,41 @@ a > img.fh5co-align-center {
   margin-right: auto;
 }
 
+.cautionBorder {
+  position : relative;
+  background: repeating-linear-gradient(45deg, yellow, yellow 5px, black 5px, black 10px);
+  height: 5px;
+}
+
+.cautionMessage {
+  background-color:yellow;
+  color: #333333;
+  font-weight: bold;
+  text-align:center;
+  font-size:16px;
+}
+
+.cautionMessage .resltMessage {
+  font-size: 12px;
+  color: red;
+}
+
+.resltSafety {
+  position: relative;
+  height: 80px;
+}
+
+.resltSafety .message {
+  line-height: 80px;
+  color: #57cecd;
+  font-weight: bold;
+}
+
+.tableHeadFont {
+  font-size:14px;
+}
+
+.tableFont {
+  font-size:12px;
+}
 /*# sourceMappingURL=style.css.map */
